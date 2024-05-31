@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../jsEmGeral/useAuth';
 import { buscaDoServidor } from '../../jsEmGeral/fetchUserData';
+import DisplayPets from './displayPets/DisplayPets';
+
 
 function Pets() {
     /******************************************************************************/
@@ -60,6 +62,8 @@ function Pets() {
             if (!response.ok) throw new Error('Erro ao enviar dados');
             const data = await response.json();
             console.log('Dados enviados com sucesso:', data);
+            setMeusPets(data);
+
         } catch (error) {
             console.error('Erro ao enviar dados:', error);
         }
@@ -73,6 +77,9 @@ function Pets() {
                     <input type='text' name='nome' value={nome} onChange={handleNomeChange} />
                 </label>
                 <p />
+
+           
+                <p /> 
                 <label>
                     Meu Pet é um :
                     <select name='animal' value={animal} onChange={handleAnimalChange}>
@@ -83,7 +90,7 @@ function Pets() {
                         <option value={7}>Reptil</option>
                         <option value={4}>Outros</option>
                     </select>
-                </label>
+                </label> 
                 <p />
                 <label>Foto do Pet:
                     <input className='form-control' type="file" id="fotoPet" name="foto" onChange={handleFotoChange} />
@@ -93,17 +100,10 @@ function Pets() {
 
             lista de imagems e dados dos meus pets
             {/***********************************/}
-            <p />
-            ####{MeusPets.map((pet, index) => (
-                <ul>
-                    <li key={index}>
-                        <p>Nome: {pet.nome}</p>
-                        <p>Tipo: {pet.tipo}</p>
-                        <p>Foto: <img src={`http://localhost/pets_esperto/petsEsperto/storage/app/public/${pet.foto}`} alt="Foto do Pet" /></p>
-                    </li>
-                </ul>
-            ))}###
-            {/***********************************/}
+            <div>
+                <DisplayPets dados={MeusPets}  />
+            </div>
+
         </>
     );
 }

@@ -34,9 +34,9 @@ export const fetchUserData = async (token, userId) => {
 /***************************************************************************/
 /***************************************************************************/
 /***************************************************************************/
-export const saveUserData = async (data) => {
-    const response = await fetch('http://localhost/pets_esperto/petsEsperto/public/api/cadastro/save', {
-        method: 'POST',
+export const saveUserData = async (data, verbo='POST',url='http://localhost/pets_esperto/petsEsperto/public/api/cadastro/save') => {
+    const response = await fetch(url, {
+        method: verbo,
         headers: {
             'Authorization': `Bearer ${data.token}`,
             'Content-Type': 'application/json'
@@ -54,6 +54,34 @@ export const saveUserData = async (data) => {
 /***************************************************************************/
 /***************************************************************************/
 /***************************************************************************/
+export const BuscarNoServidor = async (data, verbo = 'GET', url = 'http://localhost/pets_esperto/petsEsperto/public/api/cadastro/save') => {
+    let apiUrl = url;
+
+    // Se for uma solicitação GET e houver dados, adicione-os à URL
+    if (verbo === 'GET' && data) {
+        const queryString = Object.keys(data)
+            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+            .join('&');
+        
+        apiUrl += `?${queryString}`;
+    }
+
+    const response = await fetch(apiUrl, {
+        method: verbo,
+        headers: {
+            'Authorization': `Bearer ${data.token}`,
+            'Content-Type': 'application/json'
+        },
+        // Não inclua o corpo na solicitação GET
+        body: verbo !== 'GET' ? JSON.stringify(data) : undefined
+    });
+
+    if (!response.ok) {
+        throw new Error('Erro ao acessar a API');
+    }
+
+    return response.json();
+};
 
 
 /***************************************************************************/
