@@ -1,6 +1,6 @@
 // src/services/api.js
 
-
+const UrlBase = "http://localhost/pets_esperto/petsEsperto/public/api/";
 /***************************************************************************/
 /***************************************************************************/
 /***************************************************************************/
@@ -90,6 +90,9 @@ export const BuscarNoServidor = async (data, verbo = 'GET', url = 'http://localh
 /***************************************************************************/
 
 export const SalvarDAdosLarTemp = async(token,data, url) =>{
+
+    
+
     const response = await fetch(url,{
         method: 'POST',
         headers: {
@@ -119,6 +122,11 @@ export const SalvarDAdosLarTemp = async(token,data, url) =>{
 /***************************************************************************/
 /***************************************************************************/
 export const buscaDoServidor = async (token, userId, url) => {
+
+
+    ///if(url.lenght < 20) { } else{  url = UrlBase+url;  }
+
+
     const response = await fetch(url, {
         method: 'POST',
         headers: {
