@@ -20,7 +20,6 @@ function DisplayPets({ dados }) {
 
                 <li key={index}>
                     <ul>
-                        <li><Link to={`/Cadastro/Pets/Editar/${pet.id}`}>Editar</Link></li>
                         <li><Link to={`/${pet.tutorNome}/pet/${pet.nome}`}> Link Da Minha Página {pet.id} - {pet.tutorNome} </Link></li>
                     </ul>
                     <figure>

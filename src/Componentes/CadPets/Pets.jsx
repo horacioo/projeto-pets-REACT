@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../jsEmGeral/useAuth';
 import { buscaDoServidor } from '../../jsEmGeral/fetchUserData';
 import DisplayPets from './displayPets/DisplayPets';
+import SelectPets from './SelectPets';
 
 
 function Pets() {
@@ -80,17 +81,9 @@ function Pets() {
 
            
                 <p /> 
-                <label>
+                
                     Meu Pet é um :
-                    <select name='animal' value={animal} onChange={handleAnimalChange}>
-                        <option value={1}>Cachorro</option>
-                        <option value={2}>Gatos</option>
-                        <option value={5}>Peixe</option>
-                        <option value={6}>Passaro</option>
-                        <option value={7}>Reptil</option>
-                        <option value={4}>Outros</option>
-                    </select>
-                </label> 
+                    <SelectPets value={animal} onChange={(e) => setAnimal(e.target.value)} />  
                 <p />
                 <label>Foto do Pet:
                     <input className='form-control' type="file" id="fotoPet" name="foto" onChange={handleFotoChange} />
